@@ -2,9 +2,11 @@ Solution to the first project of the deep reinforcement learning nanodegree at U
 
 ## Problem definition
 
-In this environment, a double-jointed arm can move to target locations through a 3d space. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.
+In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play.
 
-The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
+The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping.
+
+The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
 
 ## Usage
 
@@ -16,9 +18,9 @@ Due to the transitive dependency to tensorflow that comes from unity ml-agents a
 
 To activate a virtual environment with pipenv issue `pipenv shell` while in the root directory of the repository.
 
-After creating and entering the virtual environment you need to set a `DRLUD_P2_ENV` shell environment which must point to the binaries of the Unity environment. Example of for Mac OS version of binaries it might be 
+After creating and entering the virtual environment you need to set a `DRLUD_P3_ENV` shell environment which must point to the binaries of the Unity environment. Example of for Mac OS version of binaries it might be 
 ```
-DRLUD_P2_ENV=../deep-reinforcement-learning/p2_navigation/Reacher.app; export DRLUD_P2_ENV
+DRLUD_P3_ENV=../deep-reinforcement-learning/p3_navigation/Tennis.app; export DRLUD_P3_ENV
 ```
 
 Details of downloading and setting of the environment are described in Udacity nanodegree materials.
@@ -46,30 +48,28 @@ simulation_hyperparameter_reference = {
 ###  Skipped some items here
 ###
 
-    24: launch_parm("ddpg",  1, ddpg_parm(int(1e5), 256,  0.99, 1e-3, 1e-4, 1e-5, 0,    False, False, 1)),
-    25: launch_parm("ddpg",  1, ddpg_parm(int(1e5), 256,  0.99, 1e-3, 1e-4, 2e-5, 0,    False, False, 1)),
+    25:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, True,  False, False, 0,  1),
+    26:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-4, 0,    1, False, False, True, 700, 1),
 }
 ```
 
-The set of hyperparameters is represented as an instance of a namedtuple `launch_parm` which has the following set of fields:
+The set of hyperparameters is represented as an instance of a namedtuple `ac_parm` which has the following set of fields in respective order:
 
-* algorithm
-* times
-* algorithm-specifgic set of hyperparameters
-
-The `algorithm` field defines an implementation of an agent, currently only `ddpg` algorithm is supported.
-
-DDPG-related hyperparameters are passed using `ddpg_parm` namedtuple and contain the following fields:
-
+* Technical value, leave `-1`
+* Technical value, leave `-1` (yup, second time)
 * memory_size - number of experiences to persist
+* Technical value, leave `""`
 * batch_size - numer of experiences to use during a learning session
 * gamma
 * tau
 * lr_actor
 * lr_critic
 * weight_decay
+* number of times to rerun the simulation
 * noise_enabled
 * gradient_clipping
+* enable boostrapping that will create several episodes with random actions
+* number of episodes for bootstrapping
 * learn_every - number of steps between learning sessions
 
 The meaning and effects of other values for these field are discussed in the [hyperparameter search notebook](Training_hyperparameter_search_analysis.ipynb). 
