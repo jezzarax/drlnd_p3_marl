@@ -21,7 +21,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 path_prefix = "./hp_search_results/"
 
 
-def train(agent, environment, n_episodes=1500, max_t=20000, random_action_phase_enabled=True, random_episodes_number=700, store_weights_to="checkpoint.pth"):
+def train(agent, environment, n_episodes=5000, max_t=20000, random_action_phase_enabled=True, random_episodes_number=200, store_weights_to="checkpoint.pth"):
     scores = []  # list containing scores from each episode
     for i_episode in range(1, n_episodes + 1):
         env_info = environment.reset(train_mode=True)[agent.name]
@@ -86,7 +86,11 @@ algorithm_factories = {
 }
 
 simulation_hyperparameter_reference = {
-    1:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, 1)
+    1:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
+    2:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
+    3:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
+    4:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
+    5:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,   50, True,  False, False, 0,  1)
 }
 
 
@@ -99,7 +103,12 @@ def run_training_session(agent_factory, agent_config: ac_parm, id):
     for seed in range(agent_config.times):
         agent = agent_factory(agent_config, seed)
         scores.append(
-            train(agent, env, store_weights_to=f"{path_prefix}set{id}_weights_role_episode_eps_seed_{seed}.pth"))
+            train(agent, 
+                env, 
+                random_action_phase_enabled=agent_config.bootstrapping_enabled, 
+                random_episodes_number=agent_config.bootstrapping_episodes, 
+                store_weights_to=f"{path_prefix}set{id}_weights_role_episode_eps_seed_{seed}.pth"
+            ))
     env.close()
     return scores
 

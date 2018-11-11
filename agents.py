@@ -24,6 +24,8 @@ ac_parm = namedtuple("ac_parm", [
     "times",
     "noise_enabled",
     "gradient_clipping",
+    "bootstrapping_enabled",
+    "bootstrapping_episodes",
     "learn_every"
 ])
 
