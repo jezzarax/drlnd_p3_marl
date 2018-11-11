@@ -86,11 +86,17 @@ algorithm_factories = {
 }
 
 simulation_hyperparameter_reference = {
-    1:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
-    2:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
-    3:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
-    4:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
-    5:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,   50, True,  False, False, 0,  1)
+    1:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
+    2:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
+    3:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 0.99, 1e-4, 1e-3, 0,    1, False, False, True, 700, 1),
+    4:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, False, False, True, 200, 1),
+    5:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-3, 0,    1, True,  False, False, 0,  1),
+    6:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-4, 0,    1, False, False, True, 700, 1),
+    7:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-3, 1e-3, 0,    1, False, False, True, 700, 1),
+    8:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-4, 0,    1, False, False, True, 200, 1),
+    9:   ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-3, 1e-3, 0,    1, False, False, True, 200, 1),
+    10:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-4, 1e-4, 0,    1, True,  False, False, 0,  1),
+    11:  ac_parm(-1, -1, int(1e5), "", 256,  0.99, 1e-3, 1e-3, 1e-3, 0,    1, True,  False, False, 0,  1),
 }
 
 
