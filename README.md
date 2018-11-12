@@ -18,12 +18,18 @@ Due to the transitive dependency to tensorflow that comes from unity ml-agents a
 
 To activate a virtual environment with pipenv issue `pipenv shell` while in the root directory of the repository.
 
-After creating and entering the virtual environment you need to set a `DRLUD_P3_ENV` shell environment which must point to the binaries of the Unity environment. Example of for Mac OS version of binaries it might be 
+For this project, you will not need to install Unity - this is because we have already built the environment for you, and you can download it from one of the links below. You need only select the environment that matches your operating system:
+
+* [Linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
+* [Headless linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip)
+* [Mac OSX](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)
+* [Windows (32-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
+* [Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
+
+After unzipping the virtual environment binary you need to set a `DRLUD_P3_ENV` shell environment which must point to the binaries of the Unity environment. Example of for Mac OS version of binaries it might be 
 ```
 DRLUD_P3_ENV=../deep-reinforcement-learning/p3_navigation/Tennis.app; export DRLUD_P3_ENV
 ```
-
-Details of downloading and setting of the environment are described in Udacity nanodegree materials.
 
 ### Training (easy way)
 
@@ -79,6 +85,8 @@ The meaning and effects of other values for these field are discussed in the [hy
 Two neural network architectures are defined in the `models.py` file. 
 * Actor class implement a three-layer neural network that learns to project the state on to an action.
 * Critic class implements a three-layer neural network that learns to map state and an action into a Q-value.
+
+For further notes regarding the actor/critic model and the neural network architecture please check the [report notebook](Report.ipynb).
 
 ## Results 
 
